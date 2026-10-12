@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harri Pehkonen</title>
+<meta name="description" content="Harri Pehkonen — systems tooling in C++, agent infrastructure, and web apps.">
+<style>
+  :root {
+    --bg: #101014;
+    --fg: #e8e6e3;
+    --dim: #9a97a0;
+    --accent: #7aa2f7;
+    --rule: #26262e;
+    --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font: 17px/1.65 system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  main { max-width: 44rem; margin: 0 auto; padding: 5rem 1.5rem 6rem; }
+  h1 { font-size: 2rem; font-weight: 600; letter-spacing: -0.02em; }
+  h1 span { color: var(--dim); font-weight: 400; }
+  .lede { margin-top: 1.2rem; color: var(--dim); max-width: 38rem; }
+  section { margin-top: 4rem; }
+  h2 {
+    font-size: 0.8rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.14em; color: var(--accent); margin-bottom: 1.4rem;
+  }
+  ul.projects { list-style: none; }
+  ul.projects li { padding: 0.9rem 0; border-top: 1px solid var(--rule); }
+  ul.projects li:first-child { border-top: none; padding-top: 0; }
+  .pname { font-weight: 600; }
+  .pname a { color: var(--fg); text-decoration: none; }
+  .pname a:hover { color: var(--accent); }
+  .plang {
+    font-family: var(--mono); font-size: 0.72rem; color: var(--dim);
+    border: 1px solid var(--rule); border-radius: 3px; padding: 0 0.4rem; margin-left: 0.5rem;
+  }
+  .pdesc { color: var(--dim); margin-top: 0.15rem; }
+  p + p { margin-top: 0.9rem; }
+  a { color: var(--accent); }
+  code, pre {
+    font-family: var(--mono); font-size: 0.85rem; background: #17171d;
+    border-radius: 4px;
+  }
+  code { padding: 0.1rem 0.35rem; }
+  pre { padding: 0.9rem 1.1rem; overflow-x: auto; margin: 0.7rem 0; }
+  pre code { padding: 0; background: none; }
+  .repos p { color: var(--dim); }
+  footer {
+    margin-top: 5rem; padding-top: 1.5rem; border-top: 1px solid var(--rule);
+    color: var(--dim); font-size: 0.85rem;
+    font-family: var(--mono);
+  }
+</style>
+</head>
+<body>
+<main>
+
+<h1>Harri Pehkonen <span>— pehkonen.dev</span></h1>
+<p class="lede">
+  I build tools I use every day: systems software in C++, infrastructure for
+  AI agents, and a few web applications. Most of it runs on my own machines —
+  the same machines that serve these packages.
+</p>
+
+<section>
+  <h2>Projects</h2>
+  <ul class="projects">
+    <li>
+      <span class="pname"><a href="https://github.com/HarryPehkonen/FSMgine">FSMgine</a></span><span class="plang">C++</span>
+      <div class="pdesc">A finite-state-machine engine driven by a textual FSM format, generating C++ tables for its compiled back end.</div>
+    </li>
+    <li>
+      <span class="pname"><a href="https://github.com/HarryPehkonen/KitCI">KitCI</a></span><span class="plang">C++</span>
+      <div class="pdesc">A C++17 CI gate engine: one binary, a per-repo gate.toml, graph outputs.</div>
+    </li>
+    <li>
+      <span class="pname"><a href="https://github.com/HarryPehkonen/Computo">Computo</a></span><span class="plang">C++</span>
+      <div class="pdesc">A sandboxed, JSON-native data transformation engine — a Lisp-like language expressed in JSON.</div>
+    </li>
+    <li>
+      <span class="pname"><a href="https://github.com/HarryPehkonen/JSONFuzz">JSONFuzz</a></span><span class="plang">C++</span>
+      <div class="pdesc">A parser-agnostic, structure-aware JSON fuzzer that holds parsers to fixed-point laws.</div>
+    </li>
+    <li>
+      <span class="pname"><a href="https://github.com/HarryPehkonen/Notes">Notes</a></span><span class="plang">TypeScript</span>
+      <div class="pdesc">My replacement for Dropbox Paper: Deno, Oak and Postgres, with a hybrid text/tag search — plus <a href="https://github.com/HarryPehkonen/notes-cli">notes-cli</a>, a stdlib-only terminal client.</div>
+    </li>
+    <li>
+      <span class="pname"><a href="https://github.com/HarryPehkonen/TNGPlaylists">TNGPlaylists</a></span><span class="plang">TypeScript</span>
+      <div class="pdesc">Playlists of Star Trek: The Next Generation, with semantic search.</div>
+    </li>
+    <li>
+      <span class="pname"><a href="https://github.com/HarryPehkonen/HermesAgentForBeginners">HermesAgentForBeginners</a></span><span class="plang">Lua</span>
+      <div class="pdesc">A book that documents learning Hermes Agent from the ground up — memory, skills, profiles, kanban — with the mistakes left in.</div>
+    </li>
+  </ul>
+</section>
+
+<section class="repos">
+  <h2>Package repositories</h2>
+  <p>
+    Software I package for my own fleet of Debian and Fedora machines,
+    signed with my repository key
+    (<a href="/repo.asc">repo.asc</a>,
+    fingerprint <code>85C18AE4&nbsp;A7B5206D&nbsp;BE2734C7&nbsp;CE749502&nbsp;49218B3C</code>).
+  </p>
+  <h2 style="margin-top:2rem; color: var(--dim); text-transform:none; letter-spacing:0; font-size:1rem;">Debian &amp; derivatives (amd64, arm64)</h2>
+<pre><code>curl -fsSL https://pehkonen.dev/repo.asc | sudo tee /etc/apt/keyrings/pehkonen.dev.asc &gt;/dev/null
+echo "deb [signed-by=/etc/apt/keyrings/pehkonen.dev.asc] https://apt.pehkonen.dev trixie main" \
+  | sudo tee /etc/apt/sources.list.d/pehkonen.dev.list</code></pre>
+  <h2 style="margin-top:2rem; color: var(--dim); text-transform:none; letter-spacing:0; font-size:1rem;">Fedora (x86_64)</h2>
+<pre><code>sudo dnf config-manager addrepo --from-repofile=https://rpm.pehkonen.dev/fedora/pehkonen.repo</code></pre>
+  <p style="margin-top:0.8rem;">The published package list lives at <a href="/packages.html">/packages.html</a>.</p>
+</section>
+
+<footer>
+  harry.pehkonen@gmail.com · <a href="https://github.com/HarryPehkonen">github.com/HarryPehkonen</a>
+</footer>
+
+</main>
+</body>
+</html>
