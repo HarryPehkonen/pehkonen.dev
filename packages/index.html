@@ -10,15 +10,17 @@
   * { margin:0; padding:0; box-sizing:border-box; }
   body { background:var(--bg); color:var(--fg);
          font:16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing:antialiased; }
-  main { max-width:56rem; margin:0 auto; padding:4rem 1.5rem 6rem; }
+  main { max-width:62rem; margin:0 auto; padding:4rem 1.5rem 6rem; }
   h1 { font-size:1.6rem; font-weight:600; letter-spacing:-0.02em; }
   p.sub { color:var(--dim); margin-top:0.6rem; }
   p.sub a { color:var(--accent); }
   table { width:100%; border-collapse:collapse; margin-top:2.2rem; }
   th { text-align:left; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.12em;
        color:var(--accent); padding:0.5rem 0.75rem 0.5rem 0; border-bottom:1px solid var(--rule); }
-  td { padding:0.75rem 0.75rem 0.75rem 0; border-top:1px solid var(--rule); vertical-align:top; }
-  td:first-child { font-family:var(--mono); font-size:0.92rem; white-space:nowrap; }
+  td { padding:0.75rem 0.75rem 0.75rem 0; border-top:1px solid var(--rule); vertical-align:top; font-size:0.92rem; }
+  td.pkg code { font-family:var(--mono); font-size:0.9rem; background:#181820; padding:0.15rem 0.45rem; border-radius:4px; user-select:all; }
+  td.src a { color:var(--accent); text-decoration:none; }
+  td.src a:hover { text-decoration:underline; }
   td.d { color:var(--dim); }
   footer { margin-top:3.5rem; padding-top:1.2rem; border-top:1px solid var(--rule);
            color:var(--dim); font-size:0.85rem; font-family:var(--mono); }
@@ -28,70 +30,78 @@
 <body>
 <main>
 <h1>Package repositories</h1>
-<p class="sub">Generated from the repositories themselves — this page is never hand-edited.
-Client setup: <a href="/">pehkonen.dev</a>. All packages are signed with the repository key
-(<a href="/repo.asc">repo.asc</a>).</p>
+<p class="sub">Generated from the repositories themselves. Click any package name to select and copy it directly to <code>sudo apt install &lt;pkg&gt;</code> or <code>sudo dnf install &lt;pkg&gt;</code>.
+Client setup: <a href="/">pehkonen.dev</a>. All packages are signed with the repository key (<a href="/repo.asc">repo.asc</a>).</p>
 <table>
-  <thead><tr><th>package</th><th>version</th><th>architectures</th><th>formats</th><th>description</th></tr></thead>
+  <thead><tr><th>Package name</th><th>GitHub source</th><th>Version</th><th>Architectures</th><th>Formats</th><th>Description</th></tr></thead>
   <tbody>
     <tr>
-      <td>codebundler</td>
+      <td class="pkg"><code>codebundler</code></td>
+      <td class="src"><a href="https://github.com/HarryPehkonen/CodeBundler" target="_blank" rel="noopener">CodeBundler</a></td>
       <td>1.0.0</td>
       <td>amd64, arm64, x86_64</td>
       <td>deb, rpm</td>
       <td class="d">bundle project files into one shareable artifact</td>
     </tr>
     <tr>
-      <td>fsmgine</td>
+      <td class="pkg"><code>fsmgine</code></td>
+      <td class="src"><a href="https://github.com/HarryPehkonen/FSMgine" target="_blank" rel="noopener">FSMgine</a></td>
       <td>2.2.0</td>
       <td>x86_64</td>
       <td>rpm</td>
       <td class="d">Finite state machine engine (runtime libraries)</td>
     </tr>
     <tr>
-      <td>fsmgine-devel</td>
+      <td class="pkg"><code>fsmgine-devel</code></td>
+      <td class="src"><a href="https://github.com/HarryPehkonen/FSMgine" target="_blank" rel="noopener">FSMgine</a></td>
       <td>2.2.0</td>
       <td>x86_64</td>
       <td>rpm</td>
       <td class="d">Development files for FSMgine</td>
     </tr>
     <tr>
-      <td>jsom</td>
+      <td class="pkg"><code>jsom</code></td>
+      <td class="src"><a href="https://github.com/HarryPehkonen/JSOM" target="_blank" rel="noopener">JSOM</a></td>
       <td>3.1.2</td>
       <td>amd64, arm64, x86_64</td>
       <td>deb, rpm</td>
       <td class="d">high-performance JSON processor (RFC 6901 JSON Pointer)</td>
     </tr>
     <tr>
-      <td>jsom-devel</td>
+      <td class="pkg"><code>jsom-devel</code></td>
+      <td class="src"><a href="https://github.com/HarryPehkonen/JSOM" target="_blank" rel="noopener">JSOM</a></td>
       <td>3.1.2</td>
       <td>x86_64</td>
       <td>rpm</td>
       <td class="d">JSOM - JavaScript Object Model (static library, headers, CMake configs)</td>
     </tr>
     <tr>
-      <td>libfsmgine-dev</td>
+      <td class="pkg"><code>libfsmgine-dev</code></td>
+      <td class="src"><a href="https://github.com/HarryPehkonen/FSMgine" target="_blank" rel="noopener">FSMgine</a></td>
       <td>2.2.0</td>
       <td>amd64, arm64</td>
       <td>deb</td>
       <td class="d">FSMgine - finite state machine engine (headers and CMake configs)</td>
     </tr>
     <tr>
-      <td>libfsmgine1</td>
+      <td class="pkg"><code>libfsmgine1</code></td>
+      <td class="src"><a href="https://github.com/HarryPehkonen/FSMgine" target="_blank" rel="noopener">FSMgine</a></td>
       <td>2.2.0</td>
       <td>amd64, arm64</td>
       <td>deb</td>
       <td class="d">FSMgine - finite state machine engine (runtime)</td>
     </tr>
     <tr>
-      <td>libjsom-dev</td>
+      <td class="pkg"><code>libjsom-dev</code></td>
+      <td class="src"><a href="https://github.com/HarryPehkonen/JSOM" target="_blank" rel="noopener">JSOM</a></td>
       <td>3.1.2</td>
       <td>amd64, arm64</td>
       <td>deb</td>
       <td class="d">JSOM - JavaScript Object Model (static library, headers, CMake configs)</td>
     </tr>
     <tr>
-      <td>notes-cli</td>
+      <td class="pkg"><code>notes-cli</code></td>
+      <td class="src"><a href="https://github.com/HarryPehkonen/notes-cli" target="_blank" rel="noopener">notes-cli</a></td>
       <td>1.0.0</td>
       <td>all, noarch</td>
       <td>deb, rpm</td>
