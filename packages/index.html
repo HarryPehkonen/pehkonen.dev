@@ -5,33 +5,132 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>pehkonen.dev — packages</title>
 <style>
-  :root { --bg:#101014; --fg:#e8e6e3; --dim:#9a97a0; --accent:#7aa2f7; --rule:#26262e;
-          --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; }
+  :root {
+    --bg: #f7f5f0;           /* Birch & warm paper */
+    --surface: #ffffff;      /* Clean card surface */
+    --fg: #1e1e24;           /* Warm graphite ink */
+    --dim: #5f5e58;          /* Slate-charcoal muted text */
+    --subtle: #8a8880;       /* Secondary metadata */
+    --border: #e2ded4;       /* Tactile hairline border */
+    --border-subtle: #ece8de;
+    --accent: #b87d2b;       /* Brushed honey brass / warm amber */
+    --accent-hover: #94631d;
+    --accent-soft: #f4ede1;  /* Soft badge wash */
+    --code-bg: #f0ebe1;
+    --mono: ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { background:var(--bg); color:var(--fg);
-         font:16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing:antialiased; }
-  main { max-width:62rem; margin:0 auto; padding:4rem 1.5rem 6rem; }
-  h1 { font-size:1.6rem; font-weight:600; letter-spacing:-0.02em; }
-  p.sub { color:var(--dim); margin-top:0.6rem; }
-  p.sub a { color:var(--accent); }
-  table { width:100%; border-collapse:collapse; margin-top:2.2rem; }
-  th { text-align:left; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.12em;
-       color:var(--accent); padding:0.5rem 0.75rem 0.5rem 0; border-bottom:1px solid var(--rule); }
-  td { padding:0.75rem 0.75rem 0.75rem 0; border-top:1px solid var(--rule); vertical-align:top; font-size:0.92rem; }
-  td.pkg code { font-family:var(--mono); font-size:0.9rem; background:#181820; padding:0.15rem 0.45rem; border-radius:4px; user-select:all; }
-  td.src a { color:var(--accent); text-decoration:none; }
-  td.src a:hover { text-decoration:underline; }
-  td.d { color:var(--dim); }
-  footer { margin-top:3.5rem; padding-top:1.2rem; border-top:1px solid var(--rule);
-           color:var(--dim); font-size:0.85rem; font-family:var(--mono); }
-  footer a { color:var(--accent); }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  main { max-width: 66rem; margin: 0 auto; padding: 4.5rem 1.5rem 6rem; }
+  
+  /* Header / Nav */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 3rem;
+  }
+  .brand {
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+    text-decoration: none;
+  }
+  .brand span {
+    color: var(--subtle);
+    font-weight: 400;
+    margin-left: 0.35rem;
+  }
+  nav {
+    display: flex;
+    gap: 1.25rem;
+    font-size: 0.9rem;
+  }
+  nav a {
+    color: var(--dim);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  nav a:hover, nav a.active {
+    color: var(--accent);
+  }
+
+  h1 { font-size: 1.85rem; font-weight: 600; letter-spacing: -0.02em; color: var(--fg); }
+  p.sub { color: var(--dim); margin-top: 0.6rem; max-width: 48rem; line-height: 1.6; }
+  p.sub a { color: var(--accent); text-decoration: none; }
+  p.sub a:hover { text-decoration: underline; }
+  p.sub code { font-family: var(--mono); font-size: 0.88em; background: var(--code-bg); padding: 0.15rem 0.4rem; border-radius: 4px; border: 1px solid var(--border-subtle); }
+
+  /* Table styling */
+  .table-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-top: 2.2rem;
+    overflow-x: auto;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+  }
+  table { width: 100%; border-collapse: collapse; text-align: left; }
+  th {
+    font-size: 0.74rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--accent); padding: 0.9rem 1rem; border-bottom: 1px solid var(--border);
+    background: #fbfaf8;
+  }
+  td {
+    padding: 0.9rem 1rem; border-top: 1px solid var(--border-subtle); vertical-align: top;
+    font-size: 0.92rem; color: var(--fg);
+  }
+  td.pkg code {
+    font-family: var(--mono); font-size: 0.88rem; background: var(--code-bg);
+    border: 1px solid var(--border); padding: 0.2rem 0.5rem; border-radius: 4px;
+    user-select: all; color: var(--fg); font-weight: 500;
+  }
+  td.src a { color: var(--accent); text-decoration: none; font-weight: 500; }
+  td.src a:hover { text-decoration: underline; color: var(--accent-hover); }
+  td.fmts span {
+    font-family: var(--mono); font-size: 0.75rem; background: var(--accent-soft);
+    color: var(--accent-hover); border: 1px solid #ecd9bc; padding: 0.15rem 0.4rem; border-radius: 3px;
+  }
+  td.d { color: var(--dim); line-height: 1.5; }
+  
+  /* Footer */
+  footer {
+    margin-top: 4.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+    color: var(--subtle); font-size: 0.85rem; display: flex; justify-content: space-between;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  footer a { color: var(--dim); text-decoration: none; }
+  footer a:hover { color: var(--accent); }
 </style>
 </head>
 <body>
 <main>
-<h1>Package repositories</h1>
-<p class="sub">Generated from the repositories themselves. Click any package name to select and copy it directly to <code>sudo apt install &lt;pkg&gt;</code> or <code>sudo dnf install &lt;pkg&gt;</code>.
-Client setup: <a href="/">pehkonen.dev</a>. All packages are signed with the repository key (<a href="/repo.asc">repo.asc</a>).</p>
+
+<header>
+  <a href="/" class="brand">Harri Pehkonen <span>pehkonen.dev</span></a>
+  <nav>
+    <a href="/#about">About</a>
+    <a href="/#projects">Projects</a>
+    <a href="/packages/" class="active">Packages</a>
+    <a href="https://github.com/HarryPehkonen" target="_blank" rel="noopener">GitHub ↗</a>
+  </nav>
+</header>
+
+<h1>Package Repositories</h1>
+<p class="sub">Generated directly from the Debian and RPM repository metadata. Click any package name to select and copy it directly to <code>sudo apt install &lt;pkg&gt;</code> or <code>sudo dnf install &lt;pkg&gt;</code>. Setup instructions are on the <a href="/">homepage</a>. All packages are signed with <a href="/repo.asc">repo.asc</a>.</p>
+
+<div class="table-wrap">
 <table>
   <thead><tr><th>Package name</th><th>GitHub source</th><th>Version</th><th>Architectures</th><th>Formats</th><th>Description</th></tr></thead>
   <tbody>
@@ -40,7 +139,7 @@ Client setup: <a href="/">pehkonen.dev</a>. All packages are signed with the rep
       <td class="src"><a href="https://github.com/HarryPehkonen/CodeBundler" target="_blank" rel="noopener">CodeBundler</a></td>
       <td>1.0.0</td>
       <td>amd64, arm64, x86_64</td>
-      <td>deb, rpm</td>
+      <td class="fmts"><span>deb, rpm</span></td>
       <td class="d">bundle project files into one shareable artifact</td>
     </tr>
     <tr>
@@ -48,7 +147,7 @@ Client setup: <a href="/">pehkonen.dev</a>. All packages are signed with the rep
       <td class="src"><a href="https://github.com/HarryPehkonen/Computo" target="_blank" rel="noopener">Computo</a></td>
       <td>1.0.0</td>
       <td>amd64, arm64, x86_64</td>
-      <td>deb, rpm</td>
+      <td class="fmts"><span>deb, rpm</span></td>
       <td class="d">Safe, sandboxed, thread-safe JSON-native data transformation engine</td>
     </tr>
     <tr>
@@ -56,7 +155,7 @@ Client setup: <a href="/">pehkonen.dev</a>. All packages are signed with the rep
       <td class="src"><a href="https://github.com/HarryPehkonen/Computo" target="_blank" rel="noopener">Computo</a></td>
       <td>1.0.0</td>
       <td>x86_64</td>
-      <td>rpm</td>
+      <td class="fmts"><span>rpm</span></td>
       <td class="d">Computo static library and development header.</td>
     </tr>
     <tr>
@@ -64,7 +163,7 @@ Client setup: <a href="/">pehkonen.dev</a>. All packages are signed with the rep
       <td class="src"><a href="https://github.com/HarryPehkonen/FSMgine" target="_blank" rel="noopener">FSMgine</a></td>
       <td>2.2.0</td>
       <td>x86_64</td>
-      <td>rpm</td>
+      <td class="fmts"><span>rpm</span></td>
       <td class="d">Finite state machine engine (runtime libraries)</td>
     </tr>
     <tr>
@@ -72,7 +171,7 @@ Client setup: <a href="/">pehkonen.dev</a>. All packages are signed with the rep
       <td class="src"><a href="https://github.com/HarryPehkonen/FSMgine" target="_blank" rel="noopener">FSMgine</a></td>
       <td>2.2.0</td>
       <td>x86_64</td>
-      <td>rpm</td>
+      <td class="fmts"><span>rpm</span></td>
       <td class="d">Development files for FSMgine</td>
     </tr>
     <tr>
@@ -80,7 +179,7 @@ Client setup: <a href="/">pehkonen.dev</a>. All packages are signed with the rep
       <td class="src"><a href="https://github.com/HarryPehkonen/JSOM" target="_blank" rel="noopener">JSOM</a></td>
       <td>3.1.2</td>
       <td>amd64, arm64, x86_64</td>
-      <td>deb, rpm</td>
+      <td class="fmts"><span>deb, rpm</span></td>
       <td class="d">high-performance JSON processor (RFC 6901 JSON Pointer)</td>
     </tr>
     <tr>
@@ -88,7 +187,7 @@ Client setup: <a href="/">pehkonen.dev</a>. All packages are signed with the rep
       <td class="src"><a href="https://github.com/HarryPehkonen/JSOM" target="_blank" rel="noopener">JSOM</a></td>
       <td>3.1.2</td>
       <td>x86_64</td>
-      <td>rpm</td>
+      <td class="fmts"><span>rpm</span></td>
       <td class="d">JSOM - JavaScript Object Model (static library, headers, CMake configs)</td>
     </tr>
     <tr>
@@ -96,7 +195,7 @@ Client setup: <a href="/">pehkonen.dev</a>. All packages are signed with the rep
       <td class="src"><a href="https://github.com/HarryPehkonen/Computo" target="_blank" rel="noopener">Computo</a></td>
       <td>1.0.0</td>
       <td>amd64, arm64</td>
-      <td>deb</td>
+      <td class="fmts"><span>deb</span></td>
       <td class="d">Safe, sandboxed, thread-safe JSON-native data transformation engine</td>
     </tr>
     <tr>
@@ -104,7 +203,7 @@ Client setup: <a href="/">pehkonen.dev</a>. All packages are signed with the rep
       <td class="src"><a href="https://github.com/HarryPehkonen/FSMgine" target="_blank" rel="noopener">FSMgine</a></td>
       <td>2.2.0</td>
       <td>amd64, arm64</td>
-      <td>deb</td>
+      <td class="fmts"><span>deb</span></td>
       <td class="d">FSMgine - finite state machine engine (headers and CMake configs)</td>
     </tr>
     <tr>
@@ -112,7 +211,7 @@ Client setup: <a href="/">pehkonen.dev</a>. All packages are signed with the rep
       <td class="src"><a href="https://github.com/HarryPehkonen/FSMgine" target="_blank" rel="noopener">FSMgine</a></td>
       <td>2.2.0</td>
       <td>amd64, arm64</td>
-      <td>deb</td>
+      <td class="fmts"><span>deb</span></td>
       <td class="d">FSMgine - finite state machine engine (runtime)</td>
     </tr>
     <tr>
@@ -120,7 +219,7 @@ Client setup: <a href="/">pehkonen.dev</a>. All packages are signed with the rep
       <td class="src"><a href="https://github.com/HarryPehkonen/JSOM" target="_blank" rel="noopener">JSOM</a></td>
       <td>3.1.2</td>
       <td>amd64, arm64</td>
-      <td>deb</td>
+      <td class="fmts"><span>deb</span></td>
       <td class="d">JSOM - JavaScript Object Model (static library, headers, CMake configs)</td>
     </tr>
     <tr>
@@ -128,12 +227,18 @@ Client setup: <a href="/">pehkonen.dev</a>. All packages are signed with the rep
       <td class="src"><a href="https://github.com/HarryPehkonen/notes-cli" target="_blank" rel="noopener">notes-cli</a></td>
       <td>1.0.0</td>
       <td>all, noarch</td>
-      <td>deb, rpm</td>
+      <td class="fmts"><span>deb, rpm</span></td>
       <td class="d">command-line client for a Notes server</td>
     </tr>
   </tbody>
 </table>
-<footer>12 packages · <a href="https://github.com/HarryPehkonen">github.com/HarryPehkonen</a></footer>
+</div>
+
+<footer>
+  <div>12 packages indexed · Self-hosted on Debian</div>
+  <div><a href="https://github.com/HarryPehkonen" target="_blank" rel="noopener">github.com/HarryPehkonen</a></div>
+</footer>
+
 </main>
 </body>
 </html>
