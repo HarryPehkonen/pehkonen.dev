@@ -151,6 +151,57 @@
   .swiss .mock-pname span { color: #3b66ff; font-weight: 700; font-family: var(--mono); }
   .swiss .mock-pdesc { color: #777777; }
   .swiss .mock-badge { background: #1a1a1a; color: #3b66ff; font-weight: 600; }
+  /* Light Nordic Variations */
+  .nordic-paper {
+    background: #f7f5f0;
+    color: #1e1e24;
+    border-color: #e2ded4;
+  }
+  .nordic-paper .mockup {
+    background: #ffffff;
+    border: 1px solid #e5e1d7;
+  }
+  .nordic-paper .mock-header { font-family: -apple-system, system-ui, sans-serif; letter-spacing: -0.02em; color: #15151a; }
+  .nordic-paper .mock-bio { color: #5f5e58; }
+  .nordic-paper .mock-project { border-color: #ebe7de; }
+  .nordic-paper .mock-pname { color: #1e1e24; }
+  .nordic-paper .mock-pname span { color: #b87d2b; font-weight: 600; }
+  .nordic-paper .mock-pdesc { color: #6e6d66; }
+  .nordic-paper .mock-badge { background: #f0ebe1; color: #94631d; font-weight: 600; }
+
+  .nordic-braun {
+    background: #f2f3f5;
+    color: #191a1d;
+    border-color: #dcdfe4;
+  }
+  .nordic-braun .mockup {
+    background: #ffffff;
+    border: 1px solid #dcdfe4;
+  }
+  .nordic-braun .mock-header { font-family: -apple-system, system-ui, sans-serif; letter-spacing: -0.02em; color: #111215; }
+  .nordic-braun .mock-bio { color: #585c65; }
+  .nordic-braun .mock-project { border-color: #e5e7eb; }
+  .nordic-braun .mock-pname { color: #191a1d; }
+  .nordic-braun .mock-pname span { color: #c25e00; font-weight: 600; }
+  .nordic-braun .mock-pdesc { color: #646872; }
+  .nordic-braun .mock-badge { background: #e5e8ed; color: #a34e00; font-weight: 600; }
+
+  .nordic-fjord {
+    background: #f5f6f7;
+    color: #1a202c;
+    border-color: #d8dee6;
+  }
+  .nordic-fjord .mockup {
+    background: #ffffff;
+    border: 1px solid #d8dee6;
+  }
+  .nordic-fjord .mock-header { font-family: -apple-system, system-ui, sans-serif; letter-spacing: -0.02em; color: #101520; }
+  .nordic-fjord .mock-bio { color: #526071; }
+  .nordic-fjord .mock-project { border-color: #e2e8f0; }
+  .nordic-fjord .mock-pname { color: #1a202c; }
+  .nordic-fjord .mock-pname span { color: #1e6080; font-weight: 600; }
+  .nordic-fjord .mock-pdesc { color: #606f82; }
+  .nordic-fjord .mock-badge { background: #e5eff5; color: #154c66; font-weight: 600; }
 </style>
 </head>
 <body>
@@ -162,11 +213,143 @@
 
   <div class="boards-grid">
     
-    <!-- 1. Nordic Functionalist -->
+    <!-- 1A. Nordic Light: Birch & Paper -->
+    <div class="board-card nordic-paper">
+      <div class="board-title">
+        <span>Nordic Light: Birch & Warm Paper</span>
+        <span class="board-subtitle">Aalto / Natural</span>
+      </div>
+      <p class="board-desc">
+        Tactile unbleached parchment base, clean white panels, warm graphite typography, and brushed honey brass accents. Natural, calm, highly readable, and never harsh or glaring.
+      </p>
+      <div class="swatches">
+        <div class="swatch-group">
+          <div class="swatch" style="background:#f7f5f0; border-color:#d5d0c4;"></div>
+          <span class="swatch-label">#f7f5f0</span>
+        </div>
+        <div class="swatch-group">
+          <div class="swatch" style="background:#ffffff; border-color:#d5d0c4;"></div>
+          <span class="swatch-label">#ffffff</span>
+        </div>
+        <div class="swatch-group">
+          <div class="swatch" style="background:#1e1e24;"></div>
+          <span class="swatch-label">#1e1e24</span>
+        </div>
+        <div class="swatch-group">
+          <div class="swatch" style="background:#5f5e58;"></div>
+          <span class="swatch-label">#5f5e58</span>
+        </div>
+        <div class="swatch-group">
+          <div class="swatch" style="background:#b87d2b;"></div>
+          <span class="swatch-label">#b87d2b</span>
+        </div>
+      </div>
+      <div class="mockup">
+        <div class="mock-header">Harri Pehkonen</div>
+        <div class="mock-bio">
+          I build tools I use every day: systems software in C++, infrastructure for AI agents, and web applications. Built for precision and self-hosted on my own hardware.
+        </div>
+        <div class="mock-project">
+          <div class="mock-pname">FSMgine <span>C++</span></div>
+          <div class="mock-pdesc">Finite-state-machine engine driven by a textual FSM grammar.</div>
+          <div class="mock-badge">fsmgine-devel · 2.2.0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1B. Nordic Light: Matte Aluminum & Braun Amber -->
+    <div class="board-card nordic-braun">
+      <div class="board-title">
+        <span>Nordic Light: Matte Aluminum & Amber</span>
+        <span class="board-subtitle">Dieter Rams / Braun</span>
+      </div>
+      <p class="board-desc">
+        Machined anodized aluminum gray, pure white surfaces, precise hairline borders, and an iconic amber-orange indicator accent. The quintessential industrial design aesthetic.
+      </p>
+      <div class="swatches">
+        <div class="swatch-group">
+          <div class="swatch" style="background:#f2f3f5; border-color:#cbd0d8;"></div>
+          <span class="swatch-label">#f2f3f5</span>
+        </div>
+        <div class="swatch-group">
+          <div class="swatch" style="background:#ffffff; border-color:#cbd0d8;"></div>
+          <span class="swatch-label">#ffffff</span>
+        </div>
+        <div class="swatch-group">
+          <div class="swatch" style="background:#191a1d;"></div>
+          <span class="swatch-label">#191a1d</span>
+        </div>
+        <div class="swatch-group">
+          <div class="swatch" style="background:#585c65;"></div>
+          <span class="swatch-label">#585c65</span>
+        </div>
+        <div class="swatch-group">
+          <div class="swatch" style="background:#c25e00;"></div>
+          <span class="swatch-label">#c25e00</span>
+        </div>
+      </div>
+      <div class="mockup">
+        <div class="mock-header">Harri Pehkonen</div>
+        <div class="mock-bio">
+          I build tools I use every day: systems software in C++, infrastructure for AI agents, and web applications. Built for precision and self-hosted on my own hardware.
+        </div>
+        <div class="mock-project">
+          <div class="mock-pname">FSMgine <span>C++</span></div>
+          <div class="mock-pdesc">Finite-state-machine engine driven by a textual FSM grammar.</div>
+          <div class="mock-badge">fsmgine-devel · 2.2.0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1C. Nordic Light: Baltic Slate & Fjord Blue -->
+    <div class="board-card nordic-fjord">
+      <div class="board-title">
+        <span>Nordic Light: Baltic Fjord & Steel</span>
+        <span class="board-subtitle">Scandinavian Coastal</span>
+      </div>
+      <p class="board-desc">
+        Soft cool stone base with deep Baltic fjord slate-blue accents. Crisp, fresh, and deeply architectural with strong typographic structure.
+      </p>
+      <div class="swatches">
+        <div class="swatch-group">
+          <div class="swatch" style="background:#f5f6f7; border-color:#cbd5e1;"></div>
+          <span class="swatch-label">#f5f6f7</span>
+        </div>
+        <div class="swatch-group">
+          <div class="swatch" style="background:#ffffff; border-color:#cbd5e1;"></div>
+          <span class="swatch-label">#ffffff</span>
+        </div>
+        <div class="swatch-group">
+          <div class="swatch" style="background:#1a202c;"></div>
+          <span class="swatch-label">#1a202c</span>
+        </div>
+        <div class="swatch-group">
+          <div class="swatch" style="background:#526071;"></div>
+          <span class="swatch-label">#526071</span>
+        </div>
+        <div class="swatch-group">
+          <div class="swatch" style="background:#1e6080;"></div>
+          <span class="swatch-label">#1e6080</span>
+        </div>
+      </div>
+      <div class="mockup">
+        <div class="mock-header">Harri Pehkonen</div>
+        <div class="mock-bio">
+          I build tools I use every day: systems software in C++, infrastructure for AI agents, and web applications. Built for precision and self-hosted on my own hardware.
+        </div>
+        <div class="mock-project">
+          <div class="mock-pname">FSMgine <span>C++</span></div>
+          <div class="mock-pdesc">Finite-state-machine engine driven by a textual FSM grammar.</div>
+          <div class="mock-badge">fsmgine-devel · 2.2.0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1. Nordic Workshop (Dark) -->
     <div class="board-card nordic">
       <div class="board-title">
-        <span>The Nordic Workshop</span>
-        <span class="board-subtitle">Functionalist</span>
+        <span>The Nordic Workshop (Dark Edition)</span>
+        <span class="board-subtitle">Warm Charcoal & Brass</span>
       </div>
       <p class="board-desc">
         Inspired by Dieter Rams and Scandinavian industrial design. Warm charcoal, tactile paper typography, and brushed brass/amber accents. Quiet confidence, immaculate negative space, and warmth without clutter.
