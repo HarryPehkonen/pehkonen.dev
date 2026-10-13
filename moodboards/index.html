@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>pehkonen.dev — Artistic Moodboards & Palettes</title>
+<style>
+  :root {
+    --bg: #101014;
+    --fg: #e8e6e3;
+    --dim: #9a97a0;
+    --accent: #7aa2f7;
+    --rule: #26262e;
+    --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font: 16px/1.6 system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    padding: 3rem 1.5rem 6rem;
+  }
+  .container { max-width: 68rem; margin: 0 auto; }
+  header { margin-bottom: 3.5rem; border-bottom: 1px solid var(--rule); padding-bottom: 1.5rem; }
+  h1 { font-size: 2rem; font-weight: 600; letter-spacing: -0.02em; }
+  header p { color: var(--dim); margin-top: 0.5rem; max-width: 44rem; }
+  
+  .boards-grid { display: grid; grid-template-columns: 1fr; gap: 3.5rem; }
+  @media (min-width: 900px) {
+    .boards-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  .board-card {
+    border-radius: 8px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    border: 1px solid transparent;
+    transition: transform 0.15s ease;
+  }
+  .board-title { font-size: 1.25rem; font-weight: 600; display: flex; align-items: baseline; justify-content: space-between; }
+  .board-subtitle { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; opacity: 0.7; }
+  .board-desc { font-size: 0.92rem; line-height: 1.5; }
+
+  /* Swatches */
+  .swatches { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem; }
+  .swatch-group { display: flex; flex-direction: column; gap: 0.25rem; }
+  .swatch {
+    width: 3.5rem; height: 2.2rem; border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .swatch-label { font-family: var(--mono); font-size: 0.68rem; opacity: 0.7; }
+
+  /* Live Component Mockup inside the card */
+  .mockup {
+    border-radius: 6px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  .mock-header { font-size: 1.3rem; font-weight: 600; }
+  .mock-bio { font-size: 0.9rem; line-height: 1.55; }
+  .mock-project {
+    padding-top: 0.8rem;
+    border-top: 1px solid;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .mock-pname { font-size: 0.95rem; font-weight: 600; display: flex; justify-content: space-between; }
+  .mock-pdesc { font-size: 0.82rem; line-height: 1.45; }
+  .mock-badge {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    padding: 0.15rem 0.45rem;
+    border-radius: 3px;
+    align-self: flex-start;
+  }
+
+  /* 1. Nordic Functionalist (Warm Charcoal & Brass) */
+  .nordic {
+    background: #141416;
+    color: #eae7e1;
+    border-color: #25252c;
+  }
+  .nordic .mockup {
+    background: #19191d;
+    border: 1px solid #282832;
+  }
+  .nordic .mock-header { font-family: -apple-system, system-ui, sans-serif; letter-spacing: -0.02em; }
+  .nordic .mock-bio { color: #a4a29c; }
+  .nordic .mock-project { border-color: #282832; }
+  .nordic .mock-pname { color: #eae7e1; }
+  .nordic .mock-pname span { color: #d4a359; }
+  .nordic .mock-pdesc { color: #8e8c86; }
+  .nordic .mock-badge { background: #23232b; color: #d4a359; }
+
+  /* 2. Kyoto Atelier (Sumi Ink & Japanese Wabi-Sabi) */
+  .kyoto {
+    background: #0d0f12;
+    color: #ede9e1;
+    border-color: #22252c;
+  }
+  .kyoto .mockup {
+    background: #13161b;
+    border: 1px solid #232732;
+  }
+  .kyoto .mock-header { font-family: "Georgia", "EB Garamond", serif; font-weight: 400; font-size: 1.45rem; }
+  .kyoto .mock-bio { font-family: "Georgia", serif; color: #9f9b93; line-height: 1.6; }
+  .kyoto .mock-project { border-color: #232732; }
+  .kyoto .mock-pname { font-family: "Georgia", serif; color: #ede9e1; }
+  .kyoto .mock-pname span { color: #d05338; font-family: var(--mono); font-size: 0.75rem; }
+  .kyoto .mock-pdesc { color: #8a8780; }
+  .kyoto .mock-badge { background: #1c2028; color: #d05338; }
+
+  /* 3. Bell Labs / Unix Engineering (Precision Terminal & Blueprint) */
+  .unix {
+    background: #0c1214;
+    color: #e2ede8;
+    border-color: #1a272b;
+  }
+  .unix .mockup {
+    background: #111a1d;
+    border: 1px solid #1c2c31;
+  }
+  .unix .mock-header { font-family: var(--mono); font-weight: 600; font-size: 1.15rem; letter-spacing: -0.01em; }
+  .unix .mock-bio { font-family: var(--mono); font-size: 0.82rem; color: #8ea39b; }
+  .unix .mock-project { border-color: #1c2c31; }
+  .unix .mock-pname { font-family: var(--mono); color: #e2ede8; }
+  .unix .mock-pname span { color: #38bdf8; font-size: 0.8rem; }
+  .unix .mock-pdesc { font-family: var(--mono); font-size: 0.78rem; color: #72867e; }
+  .unix .mock-badge { background: #18252a; color: #38bdf8; }
+
+  /* 4. High-Contrast Swiss Monolith (Stark Architectural Brutalism) */
+  .swiss {
+    background: #080808;
+    color: #ffffff;
+    border-color: #202020;
+  }
+  .swiss .mockup {
+    background: #0f0f0f;
+    border: 1px solid #222222;
+  }
+  .swiss .mock-header { font-weight: 700; text-transform: uppercase; letter-spacing: -0.03em; font-size: 1.35rem; }
+  .swiss .mock-bio { color: #888888; font-size: 0.88rem; }
+  .swiss .mock-project { border-color: #222222; }
+  .swiss .mock-pname { color: #ffffff; }
+  .swiss .mock-pname span { color: #3b66ff; font-weight: 700; font-family: var(--mono); }
+  .swiss .mock-pdesc { color: #777777; }
+  .swiss .mock-badge { background: #1a1a1a; color: #3b66ff; font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>pehkonen.dev — Artistic Moodboards & Palettes</h1>
+    <p>Four distinct artistic directions exploring color, typography, contrast, and personality. Each card features real color swatches and a live component preview.</p>
+  </header>
+
+  <div class="boards-grid">
+    
+    <!-- 1. Nordic Functionalist -->
+    <div class="board-card nordic">
+      <div class="board-title">
+        <span>The Nordic Workshop</span>
+        <span class="board-subtitle">Functionalist</span>
+      </div>
+      <p class="board-desc">
+        Inspired by Dieter Rams and Scandinavian industrial design. Warm charcoal, tactile paper typography, and brushed brass/amber accents. Quiet confidence, immaculate negative space, and warmth without clutter.
+      </p>
+      <div class="swatches">
+        <div class="swatch-group">
+          <div class="swatch" style="background:#141416;"></div>
+          <span class="swatch-label">#141416</span>
+        </div>
+        <div class="swatch-group">
+          <div class="swatch" style="background:#19191d;"></div>
+          <span class="swatch-label">#19191d</span>
+        </div>
+        <div class="swatch-group">
+          <div class="swatch" style="background:#eae7e1;"></div>
+          <span class="swatch-label">#eae7e1</span>
+        </div>
+        <div class="swatch-group">
+          <div class="swatch" style="background:#8e8c86;"></div>
+          <span class="swatch-label">#8e8c86</span>
+        </div>
+        <div class="swatch-group">
+          <div class="swatch" style="background:#d4a359;"></div>
+          <span class="swatch-label">#d4a359</span>
+        </div>
+      </div>
+      <div class="mockup">
+        <div class="mock-header">Harri Pehkonen</div>
+        <div class="mock-bio">
+          I build tools I use every day: systems software in C++, infrastructure for AI agents, and web applications. Built for precision and self-hosted on my own hardware.
+        </div>
+        <div class="mock-project">
+          <div class="mock-pname">FSMgine <span>C++</span></div>
+          <div class="mock-pdesc">Finite-state-machine engine driven by a textual FSM grammar.</div>
+          <div class="mock-badge">fsmgine-devel · 2.2.0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Kyoto Atelier -->
+    <div class="board-card kyoto">
+      <div class="board-title">
+        <span>The Kyoto Atelier</span>
+        <span class="board-subtitle">Wabi-Sabi / Ink Wash</span>
+      </div>
+      <p class="board-desc">
+        Organic, literary, and contemplative. Deep sumi ink black paired with textured parchment tones and a single restrained cinnabar/vermilion seal accent. Editorial serif headers give the site the gravitas of a master craftsman's notebook.
+      </p>
+      <div class="swatches">
+        <div class="swatch-group">
+          <div class="swatch" style="background:#0d0f12;"></div>
+          <span class="swatch-label">#0d0f12</span>
+        </div>
+        <div class="swatch-group">
+          <div class="swatch" style="background:#13161b;"></div>
+          <span class="swatch-label">#13161b</span>
+        </div>
+        <div class="swatch-group">
+          <div class="swatch" style="background:#ede9e1;"></div>
+          <span class="swatch-label">#ede9e1</span>
+        </div>
+        <div class="swatch-group">
+          <div class="swatch" style="background:#8a8780;"></div>
+          <span class="swatch-label">#8a8780</span>
+        </div>
+        <div class="swatch-group">
+          <div class="swatch" style="background:#d05338;"></div>
+          <span class="swatch-label">#d05338</span>
+        </div>
+      </div>
+      <div class="mockup">
+        <div class="mock-header">Harri Pehkonen</div>
+        <div class="mock-bio">
+          I craft deliberate software: systems engines in C++, resilient agent machinery, and self-hosted notes. Tools built with care and kept close to the metal.
+        </div>
+        <div class="mock-project">
+          <div class="mock-pname">FSMgine <span>C++</span></div>
+          <div class="mock-pdesc">A finite-state-machine engine compiling textual state definitions into direct C++ tables.</div>
+          <div class="mock-badge">libfsmgine-dev · 2.2.0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Unix Blueprint -->
+    <div class="board-card unix">
+      <div class="board-title">
+        <span>The Bell Labs Atelier</span>
+        <span class="board-subtitle">1970s Unix / Systems Craft</span>
+      </div>
+      <p class="board-desc">
+        An homage to classic computing labs, oscilloscope phosphors, and technical schematics. Deep slate-cyan night, technical white, and electric blueprint cyan. Crisp, dense, high-utility, and unapologetically engineered.
+      </p>
+      <div class="swatches">
+        <div class="swatch-group">
+          <div class="swatch" style="background:#0c1214;"></div>
+          <span class="swatch-label">#0c1214</span>
+        </div>
+        <div class="swatch-group">
+          <div class="swatch" style="background:#111a1d;"></div>
+          <span class="swatch-label">#111a1d</span>
+        </div>
+        <div class="swatch-group">
+          <div class="swatch" style="background:#e2ede8;"></div>
+          <span class="swatch-label">#e2ede8</span>
+        </div>
+        <div class="swatch-group">
+          <div class="swatch" style="background:#72867e;"></div>
+          <span class="swatch-label">#72867e</span>
+        </div>
+        <div class="swatch-group">
+          <div class="swatch" style="background:#38bdf8;"></div>
+          <span class="swatch-label">#38bdf8</span>
+        </div>
+      </div>
+      <div class="mockup">
+        <div class="mock-header">HARRI_PEHKONEN // 0x01</div>
+        <div class="mock-bio">
+          Systems tooling in C++, autonomous agent infrastructure, and local-first utilities. Built for speed, predictability, and Unix philosophy.
+        </div>
+        <div class="mock-project">
+          <div class="mock-pname">fsmgine(3) <span>[CXX-17]</span></div>
+          <div class="mock-pdesc">Textual FSM compiler and tabular state-transition engine.</div>
+          <div class="mock-badge">dnf install fsmgine-devel</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Swiss Monolith -->
+    <div class="board-card swiss">
+      <div class="board-title">
+        <span>The Swiss Monolith</span>
+        <span class="board-subtitle">Architectural Brutalism</span>
+      </div>
+      <p class="board-desc">
+        Radical reduction and maximum clarity. Deep pitch black, stark high-contrast typography, and an intense International Klein Blue accent. Monumental headings, tight grids, and pure functional minimalism.
+      </p>
+      <div class="swatches">
+        <div class="swatch-group">
+          <div class="swatch" style="background:#080808;"></div>
+          <span class="swatch-label">#080808</span>
+        </div>
+        <div class="swatch-group">
+          <div class="swatch" style="background:#0f0f0f;"></div>
+          <span class="swatch-label">#0f0f0f</span>
+        </div>
+        <div class="swatch-group">
+          <div class="swatch" style="background:#ffffff;"></div>
+          <span class="swatch-label">#ffffff</span>
+        </div>
+        <div class="swatch-group">
+          <div class="swatch" style="background:#777777;"></div>
+          <span class="swatch-label">#777777</span>
+        </div>
+        <div class="swatch-group">
+          <div class="swatch" style="background:#3b66ff;"></div>
+          <span class="swatch-label">#3b66ff</span>
+        </div>
+      </div>
+      <div class="mockup">
+        <div class="mock-header">HARRI PEHKONEN</div>
+        <div class="mock-bio">
+          Systems software in C++, agent infrastructure, and personal web tools. Distributed directly from private package repositories.
+        </div>
+        <div class="mock-project">
+          <div class="mock-pname">FSMGINE <span>2.2.0</span></div>
+          <div class="mock-pdesc">Finite-state-machine engine with text DSL compiler.</div>
+          <div class="mock-badge">APT / DNF</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
