@@ -65,10 +65,13 @@
     display: flex;
     gap: 1.25rem;
     font-size: 0.9rem;
+    flex-wrap: wrap;      /* extra items wrap as whole labels, never mid-word */
+    row-gap: 0.35rem;
   }
   nav a {
     color: var(--dim);
     text-decoration: none;
+    white-space: nowrap;
     transition: color 0.15s ease;
   }
   nav a:hover {
@@ -287,6 +290,7 @@
       <a href="#about">About</a>
       <a href="#projects">Projects</a>
       <a href="/packages/">Packages</a>
+      <a href="/ram-prices/">Prices</a>
       <a href="https://github.com/HarryPehkonen" target="_blank" rel="noopener">GitHub ↗</a>
     </nav>
   </header>
@@ -461,6 +465,18 @@ sudo apt update</code></pre>
       <pre><code>sudo dnf config-manager addrepo --from-repofile=https://rpm.pehkonen.dev/fedora/pehkonen.repo</code></pre>
 
       <a href="/packages/" class="packages-link">Browse all available packages and architectures &rarr;</a>
+    </div>
+  </section>
+
+  <!-- Hardware Price Tracker -->
+  <section id="prices">
+    <span class="section-label">Live Data</span>
+    <div class="repos-box">
+      <h2 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 0.6rem;">Hardware Price Tracker</h2>
+      <p>
+        A scheduled job on my own hardware prices Raspberry Pi 5 / Pi 4 boards and DDR4/DDR5 memory kits once a week, records the listings in a local SQLite database, and redraws the comparison graphs in Canadian dollars. The published page is just that run's output.
+      </p>
+      <a href="/ram-prices/" class="packages-link">See the latest Raspberry Pi and RAM prices &rarr;</a>
     </div>
   </section>
 

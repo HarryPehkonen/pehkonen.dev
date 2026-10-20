@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>pehkonen.dev — hardware price tracker</title>
+<meta name="description" content="Weekly Raspberry Pi and DDR4/DDR5 memory price tracking across Canadian and US retailers, in CAD.">
+<style>
+  :root {
+    --bg: #f7f5f0;           /* Birch & warm paper */
+    --surface: #ffffff;      /* Clean card surface */
+    --fg: #1e1e24;           /* Warm graphite ink */
+    --dim: #5f5e58;          /* Slate-charcoal muted text */
+    --subtle: #8a8880;       /* Secondary metadata */
+    --border: #e2ded4;       /* Tactile hairline border */
+    --border-subtle: #ece8de;
+    --accent: #b87d2b;       /* Brushed honey brass / warm amber */
+    --accent-hover: #94631d;
+    --accent-soft: #f4ede1;  /* Soft badge wash */
+    --code-bg: #f0ebe1;
+    --mono: ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  main { max-width: 66rem; margin: 0 auto; padding: 4.5rem 1.5rem 6rem; }
+
+  /* Header / Nav */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .brand {
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+    text-decoration: none;
+  }
+  .brand span {
+    color: var(--subtle);
+    font-weight: 400;
+    margin-left: 0.35rem;
+  }
+  nav {
+    display: flex;
+    gap: 1.25rem;
+    font-size: 0.9rem;
+    flex-wrap: wrap;      /* extra items wrap as whole labels, never mid-word */
+    row-gap: 0.35rem;
+  }
+  nav a {
+    color: var(--dim);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.15s ease;
+  }
+  nav a:hover, nav a.active {
+    color: var(--accent);
+  }
+
+  h1 { font-size: 1.85rem; font-weight: 600; letter-spacing: -0.02em; color: var(--fg); }
+  p.sub { color: var(--dim); margin-top: 0.6rem; max-width: 52rem; line-height: 1.6; }
+  p.sub a { color: var(--accent); text-decoration: none; }
+  p.sub a:hover { text-decoration: underline; }
+  p.sub code { font-family: var(--mono); font-size: 0.88em; background: var(--code-bg); padding: 0.15rem 0.4rem; border-radius: 4px; border: 1px solid var(--border-subtle); }
+
+  /* Graph card */
+  figure {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-top: 2.2rem;
+    padding: 1.25rem 1.25rem 1rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+  }
+  figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+  figcaption {
+    margin-top: 1rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--border-subtle);
+    color: var(--subtle);
+    font-size: 0.85rem;
+    line-height: 1.55;
+  }
+  figcaption strong { color: var(--dim); font-weight: 600; }
+  .no-graph {
+    display: none;
+    padding: 4rem 1rem;
+    text-align: center;
+    color: var(--dim);
+    font-size: 0.95rem;
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+  }
+
+  /* Sources list */
+  .sources {
+    margin-top: 2.2rem;
+  }
+  .sources h2 {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-bottom: 0.9rem;
+  }
+  .sources ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    max-width: 52rem;
+  }
+  .sources li {
+    color: var(--dim);
+    font-size: 0.92rem;
+    padding-left: 0.9rem;
+    border-left: 2px solid var(--border);
+  }
+  .sources code {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    background: var(--accent-soft);
+    color: var(--accent-hover);
+    border: 1px solid #ecd9bc;
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+  }
+
+  /* Footer */
+  footer {
+    margin-top: 4.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+    color: var(--subtle); font-size: 0.85rem; display: flex; justify-content: space-between;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  footer a { color: var(--dim); text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <a href="/" class="brand">Harri Pehkonen <span>pehkonen.dev</span></a>
+  <nav>
+    <a href="/#about">About</a>
+    <a href="/#projects">Projects</a>
+    <a href="/packages/">Packages</a>
+    <a href="/ram-prices/" class="active">Prices</a>
+    <a href="https://github.com/HarryPehkonen" target="_blank" rel="noopener">GitHub ↗</a>
+  </nav>
+</header>
+
+<h1>Hardware Price Tracker</h1>
+<p class="sub">
+  Raspberry Pi boards and DDR4/DDR5 memory kits, priced weekly in Canadian dollars and recorded in a local SQLite database. A scheduled job on my own hardware collects the listings and redraws the graph below; the raw data never leaves the machine. Part of <a href="/">pehkonen.dev</a>.
+</p>
+
+<figure>
+  <img id="graph" src="price_trends.png"
+       width="1987" height="1680"
+       alt="Two stacked line charts. Top: Raspberry Pi 5 and Raspberry Pi 4 boards (4GB and 8GB) from PiShop.ca, CanaKit, Seeed Studio and Adafruit, plotted from about $140 to $285 CAD between Oct 15 and Oct 18 2026, every line flat. Bottom: memory kits from Canada Computers versus market best — DDR5-6000 64GB $2109, DDR5-6000 32GB $1089.99, DDR5 SODIMM 32GB $791.99 and DDR4-3200 16GB $179.99 CAD, all flat over the same dates.">
+  <div class="no-graph" id="no-graph">
+    The graph has not been published to this page yet. It is regenerated on every tracker run; check back after the next scheduled collection.
+  </div>
+  <figcaption>
+    <strong>All prices in CAD.</strong> Values are as-listed at collection time, converted to Canadian dollars where needed; no tax, shipping, or bundle discounts are included. Lines are flat where a store's listing did not move between collections.
+    <span id="updated">Regenerated by the weekly price-tracking run.</span>
+  </figcaption>
+</figure>
+
+<div class="sources">
+  <h2>What is tracked</h2>
+  <ul>
+    <li><code>Raspberry Pi 5 / Pi 4 — 4GB &amp; 8GB</code> at PiShop.ca, CanaKit, Seeed Studio, and Adafruit (USD listings converted to CAD).</li>
+    <li><code>Memory kits</code> at Canada Computers — DDR4-3200 16GB, DDR5-6000 32GB and 64GB, and DDR5-6000 32GB SODIMM — each shown against the best market price found for the same capacity.</li>
+  </ul>
+</div>
+
+<footer>
+  <div>Collected weekly on self-hosted hardware · Static HTML &amp; CSS · No cookies</div>
+  <div><a href="/">&larr; pehkonen.dev</a> · <a href="mailto:harry.pehkonen@gmail.com">harry.pehkonen@gmail.com</a></div>
+</footer>
+
+</main>
+<script>
+  (function () {
+    var img = document.getElementById('graph');
+    var missing = document.getElementById('no-graph');
+    function failed() {
+      img.style.display = 'none';
+      missing.style.display = 'block';
+    }
+    // The image may already have failed before this script ran.
+    if (img.complete && img.naturalWidth === 0) { failed(); }
+    img.addEventListener('error', failed);
+
+    // "Last updated" comes from the published file's own Last-Modified header,
+    // so the caption can never claim a freshness the deploy did not deliver.
+    fetch(img.getAttribute('src'), { method: 'HEAD', cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.headers.get('Last-Modified') : null; })
+      .then(function (header) {
+        if (!header) { return; }
+        var when = new Date(header);
+        if (isNaN(when.getTime())) { return; }
+        document.getElementById('updated').textContent =
+          'Graph regenerated ' + when.toLocaleString('en-CA', {
+            year: 'numeric', month: 'short', day: 'numeric',
+            hour: '2-digit', minute: '2-digit', timeZoneName: 'short'
+          }) + '.';
+      })
+      .catch(function () { /* keep the static caption */ });
+  })();
+</script>
+</body>
+</html>

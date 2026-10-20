@@ -1,0 +1,4 @@
+# The tracker graph is published by the weekly price-tracking run (rsync onto the
+# deployed docroot), not committed: a tracked binary in the deployed checkout would
+# turn into a dirty-file conflict on the next `git pull --ff-only`.
+/ram-prices/price_trends.png
