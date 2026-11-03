@@ -106,7 +106,7 @@
   /* A transparent pad behind each label, so the target is the whole label, not the
      glyph outlines (matplotlib emits legend text as vector glyphs, not <text>). */
   #chart svg rect.hit { fill: transparent; pointer-events: all; }
-  #chart svg g[id^="lbl-"].picked rect.hit { fill: var(--accent-soft); }
+  #chart svg g[id^="lbl-"].picked rect.hit { fill: var(--accent-soft); stroke: #ecd9bc; stroke-width: 0.6; }
   #hover-hint { display: block; margin-top: 0.35rem; opacity: 0.85; }
   figcaption {
     margin-top: 1rem;
